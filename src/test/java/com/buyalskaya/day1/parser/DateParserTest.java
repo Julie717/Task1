@@ -1,21 +1,32 @@
 package com.buyalskaya.day1.parser;
 
 import com.buyalskaya.day1.entity.DateYearMonth;
-import org.testng.Assert;
+import com.buyalskaya.day1.exception.InputDataFormatException;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.*;
 
 public class DateParserTest {
     DateParser dateParser = new DateParser();
 
     @Test
     public void testDateParserPositive() {
-        DateYearMonth actual = dateParser.dateParser("01/01/2020");
-        DateYearMonth expected = new DateYearMonth(2020, 1);
-        Assert.assertEquals(actual, expected);
+        try {
+            DateYearMonth actual = dateParser.dateParser("01/01/2020");
+            DateYearMonth expected = new DateYearMonth(2020, 1);
+            assertEquals(actual, expected);
+        } catch (InputDataFormatException ex) {
+            fail();
+        }
     }
 
-    @Test(expectedExceptions = NumberFormatException.class)
-    public void testDateParserNegative() {
+    @Test(expectedExceptions = InputDataFormatException.class)
+    public void testDateParserNegative() throws InputDataFormatException {
         dateParser.dateParser("01/13/2020");
+    }
+
+    @Test
+    public void testDateParserException() {
+        assertThrows(InputDataFormatException.class,() -> dateParser.dateParser("01/2/-2020"));
     }
 }

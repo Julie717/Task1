@@ -1,9 +1,10 @@
 package com.buyalskaya.day1.comparator;
 
 import com.buyalskaya.day1.entity.Point;
-import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.*;
 
 public class PointComparatorTest {
     PointComparator pointComparator = new PointComparator();
@@ -24,6 +25,6 @@ public class PointComparatorTest {
     @Test(dataProvider = "dataForPointComparator")
     public void testParamsPointComparator(Point point1, Point point2, int expected) {
         int actual = pointComparator.compare(point1, point2);
-        Assert.assertEquals(actual, expected);
+        assertEquals(actual, expected);
     }
 }

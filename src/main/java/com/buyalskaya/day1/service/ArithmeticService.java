@@ -1,5 +1,6 @@
 package com.buyalskaya.day1.service;
 
+import com.buyalskaya.day1.exception.InputDataFormatException;
 import com.buyalskaya.day1.validator.NumberValidator;
 
 import static java.lang.Math.pow;
@@ -8,26 +9,26 @@ public class ArithmeticService {
     private static final String EXCEPTION_CAPTION_INCORRECT_NUMBER = "These data are incorrect";
     private static final int MIN_AMOUNT_OF_EVEN_NUMBERS = 2;
 
-    public int lastDigitOfSquareNumber(int number) {
+    public int lastDigitOfSquareNumber(int number) throws InputDataFormatException {
         NumberValidator numberValidation = new NumberValidator();
         if (numberValidation.validateNumber(number)) {
             int lastDigitOfSquareNumber = (int) pow(number, 2) % 10;
             return lastDigitOfSquareNumber;
         } else {
-            throw new NumberFormatException(EXCEPTION_CAPTION_INCORRECT_NUMBER);
+            throw new InputDataFormatException(EXCEPTION_CAPTION_INCORRECT_NUMBER);
         }
     }
 
-    public boolean isEven(int number) {
+    public boolean isEven(int number) throws InputDataFormatException {
         NumberValidator numberValidation = new NumberValidator();
         if (numberValidation.validateNumber(number)) {
             return number % 2 == 0;
         } else {
-            throw new NumberFormatException(EXCEPTION_CAPTION_INCORRECT_NUMBER);
+            throw new InputDataFormatException(EXCEPTION_CAPTION_INCORRECT_NUMBER);
         }
     }
 
-    public boolean isEvenTwoNumbers(int... arrayNumber) {
+    public boolean isEvenTwoNumbers(int... arrayNumber) throws InputDataFormatException {
         int amountOfEven = 0;
         for (int i = 0; i < arrayNumber.length; i++) {
             if (isEven(arrayNumber[i])) {
@@ -38,7 +39,7 @@ public class ArithmeticService {
     }
 
 
-    public int sumDivides(int number) {
+    public int sumDivides(int number) throws InputDataFormatException {
         NumberValidator numberValidation = new NumberValidator();
         if (numberValidation.validatePositiveNumber(number)) {
             int sum = 1;
@@ -49,11 +50,11 @@ public class ArithmeticService {
             }
             return sum;
         } else {
-            throw new NumberFormatException(EXCEPTION_CAPTION_INCORRECT_NUMBER);
+            throw new InputDataFormatException(EXCEPTION_CAPTION_INCORRECT_NUMBER);
         }
     }
 
-    public boolean isPerfectNumber(int number) {
+    public boolean isPerfectNumber(int number) throws InputDataFormatException {
         return sumDivides(number) == number;
     }
 }

@@ -1,9 +1,11 @@
 package com.buyalskaya.day1.service;
 
 import com.buyalskaya.day1.entity.DateYearMonth;
-import org.testng.Assert;
+import com.buyalskaya.day1.exception.InputDataFormatException;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.*;
 
 public class DateServiceTest {
     DateService dateService = new DateService();
@@ -23,12 +25,17 @@ public class DateServiceTest {
 
     @Test(dataProvider = "dataForDateService")
     public void testParamsDateService(DateYearMonth dateYearMonth, int expected) {
-        int actual = dateService.amountOfDaysInMonth(dateYearMonth);
-        Assert.assertEquals(actual, expected);
+        try {
+            int actual = dateService.amountOfDaysInMonth(dateYearMonth);
+            assertEquals(actual, expected);
+        } catch (
+                InputDataFormatException ex) {
+            fail();
+        }
     }
 
-    @Test(expectedExceptions = NumberFormatException.class)
-    public void testDateServiceNegative() {
+    @Test(expectedExceptions = InputDataFormatException.class)
+    public void testDateServiceNegative() throws InputDataFormatException {
         DateYearMonth dateYearMonth = new DateYearMonth(1910, 13);
         dateService.amountOfDaysInMonth(dateYearMonth);
     }

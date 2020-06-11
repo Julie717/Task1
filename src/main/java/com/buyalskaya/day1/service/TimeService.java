@@ -1,6 +1,7 @@
 package com.buyalskaya.day1.service;
 
 import com.buyalskaya.day1.entity.Time;
+import com.buyalskaya.day1.exception.InputDataFormatException;
 import com.buyalskaya.day1.validator.TimeValidator;
 
 public class TimeService {
@@ -8,7 +9,7 @@ public class TimeService {
     public static int SECONDS_IN_MINUTE = 60;
     public static final String EXCEPTION_CAPTION_INCORRECT_TIME = "This time is incorrect";
 
-    public Time calculateTime(int seconds) {
+    public Time calculateTime(int seconds) throws InputDataFormatException {
         TimeValidator timeValidation = new TimeValidator();
         if (timeValidation.validateSecond(seconds)) {
             int hour = seconds / SECONDS_IN_HOUR;
@@ -18,7 +19,7 @@ public class TimeService {
             Time time = new Time(hour, minute, second);
             return time;
         } else {
-            throw new NumberFormatException(EXCEPTION_CAPTION_INCORRECT_TIME);
+            throw new InputDataFormatException(EXCEPTION_CAPTION_INCORRECT_TIME);
         }
     }
 }

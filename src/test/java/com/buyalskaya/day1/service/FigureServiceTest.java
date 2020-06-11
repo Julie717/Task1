@@ -1,22 +1,29 @@
 package com.buyalskaya.day1.service;
 
 import com.buyalskaya.day1.entity.Point;
-import org.testng.Assert;
+import com.buyalskaya.day1.exception.InputDataFormatException;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.*;
 
 public class FigureServiceTest {
     FigureService figureService = new FigureService();
 
     @Test
     public void testAreaSquareInscribedInCirclePositive() {
-        double actual = figureService.areaSquareInscribedInCircle(25);
-        double expected = 25.0 / 2.0;
-        Assert.assertEquals(actual, expected);
+        try {
+            double actual = figureService.areaSquareInscribedInCircle(25);
+            double expected = 25.0 / 2.0;
+            assertEquals(actual, expected);
+        } catch (
+                InputDataFormatException ex) {
+            fail();
+        }
     }
 
-    @Test(expectedExceptions = NumberFormatException.class)
-    public void testAreaSquareInscribedInCircleNegative() {
+    @Test(expectedExceptions = InputDataFormatException.class)
+    public void testAreaSquareInscribedInCircleNegative() throws InputDataFormatException {
         figureService.areaSquareInscribedInCircle(1601);
     }
 
@@ -26,14 +33,7 @@ public class FigureServiceTest {
         Point point2 = new Point(1, 1);
         double actual = figureService.distanceBetweenPoints(point1, point2);
         double expected = 2.0;
-        Assert.assertEquals(actual, expected);
-    }
-
-    @Test(expectedExceptions = NumberFormatException.class)
-    public void testDistanceBetweenPointsNegative() {
-        Point point1 = new Point(1, -1);
-        Point point2 = new Point(1, -20.1);
-        figureService.distanceBetweenPoints(point1, point2);
+        assertEquals(actual, expected);
     }
 
     @DataProvider(name = "dataForPointNearestToCenter")
@@ -51,33 +51,55 @@ public class FigureServiceTest {
 
     @Test(dataProvider = "dataForPointNearestToCenter")
     public void testParamsPointNearestToCenter(Point point1, Point point2, int expected) {
-        int actual = figureService.pointNearestToCenter(point1, point2);
-        Assert.assertEquals(actual, expected);
+        try {
+            int actual = figureService.pointNearestToCenter(point1, point2);
+            assertEquals(actual, expected);
+        } catch (
+                InputDataFormatException ex) {
+            fail();
+        }
+    }
+
+    @Test(expectedExceptions = InputDataFormatException.class)
+    public void testPointNearestToCenterNegative() throws InputDataFormatException {
+        Point point1 = new Point(1, -1);
+        Point point2 = new Point(20.4, 1);
+        figureService.pointNearestToCenter(point1, point2);
     }
 
     @Test
     public void testAreaCirclePositive() {
-        double radius = 5;
-        double actual = figureService.areaCircle(radius);
-        double expected = Math.PI * Math.pow(radius, 2);
-        Assert.assertEquals(actual, expected);
+        try {
+            double radius = 5;
+            double actual = figureService.areaCircle(radius);
+            double expected = Math.PI * Math.pow(radius, 2);
+            assertEquals(actual, expected);
+        } catch (
+                InputDataFormatException ex) {
+            fail();
+        }
     }
 
-    @Test(expectedExceptions = NumberFormatException.class)
-    public void testAreaCircleNegative() {
+    @Test(expectedExceptions = InputDataFormatException.class)
+    public void testAreaCircleNegative() throws InputDataFormatException {
         figureService.areaCircle(25);
     }
 
     @Test
     public void testCircumferencePositive() {
-        double radius = 5;
-        double actual = figureService.circumference(radius);
-        double expected = 2 * Math.PI * radius;
-        Assert.assertEquals(actual, expected);
+        try {
+            double radius = 5;
+            double actual = figureService.circumference(radius);
+            double expected = 2 * Math.PI * radius;
+            assertEquals(actual, expected);
+        } catch (
+                InputDataFormatException ex) {
+            fail();
+        }
     }
 
-    @Test(expectedExceptions = NumberFormatException.class)
-    public void testCircumferenceNegative() {
+    @Test(expectedExceptions = InputDataFormatException.class)
+    public void testCircumferenceNegative() throws InputDataFormatException {
         figureService.areaCircle(-1);
     }
 }

@@ -1,9 +1,10 @@
 package com.buyalskaya.day1.validator;
 
 import com.buyalskaya.day1.entity.DateYearMonth;
-import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.*;
 
 public class DateValidatorTest {
     DateValidator dateValidator = new DateValidator();
@@ -26,20 +27,20 @@ public class DateValidatorTest {
     @Test(dataProvider = "dataForDate")
     public void testParamsDate(String date, boolean expected) {
         boolean actual = dateValidator.validateStringDate(date);
-        Assert.assertEquals(actual, expected);
+        assertEquals(actual, expected);
     }
 
     @Test
     public void testValidateDatePositive() {
         DateYearMonth dateYearMonth = new DateYearMonth(2002, 8);
         boolean actual = dateValidator.validateYearMonth(dateYearMonth);
-        Assert.assertTrue(actual);
+        assertTrue(actual);
     }
 
     @Test
     public void testValidateDateIntegerNegative() {
         DateYearMonth dateYearMonth = new DateYearMonth(2002, 13);
         boolean actual = dateValidator.validateYearMonth(dateYearMonth);
-        Assert.assertFalse(actual);
+        assertFalse(actual);
     }
 }

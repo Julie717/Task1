@@ -2,12 +2,13 @@ package com.buyalskaya.day1.service;
 
 import com.buyalskaya.day1.entity.DateYearMonth;
 import com.buyalskaya.day1.entity.Month;
+import com.buyalskaya.day1.exception.InputDataFormatException;
 import com.buyalskaya.day1.validator.DateValidator;
 
 public class DateService {
     public static final String EXCEPTION_CAPTION_INCORRECT_DATE = "This date is incorrect";
 
-    public int amountOfDaysInMonth(DateYearMonth dateYearMonth) {
+    public int amountOfDaysInMonth(DateYearMonth dateYearMonth) throws InputDataFormatException{
         DateValidator dateValidation = new DateValidator();
         if (dateValidation.validateYearMonth(dateYearMonth)) {
             int year = dateYearMonth.getYear();
@@ -23,7 +24,7 @@ public class DateService {
             }
             return days;
         } else {
-            throw new NumberFormatException(EXCEPTION_CAPTION_INCORRECT_DATE);
+            throw new InputDataFormatException(EXCEPTION_CAPTION_INCORRECT_DATE);
         }
     }
 

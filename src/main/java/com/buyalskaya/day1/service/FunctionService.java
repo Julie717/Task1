@@ -1,6 +1,7 @@
 package com.buyalskaya.day1.service;
 
 import com.buyalskaya.day1.entity.Point;
+import com.buyalskaya.day1.exception.InputDataFormatException;
 import com.buyalskaya.day1.validator.FigureValidator;
 import com.buyalskaya.day1.validator.FractionValidator;
 
@@ -15,24 +16,25 @@ public class FunctionService {
     public static final String EXCEPTION_CAPTION_INCORRECT_VALUES = "These values are incorrect";
     public static final String EXCEPTION_DIVISION_BY_ZERO = "Division by zero";
 
-    public double specialFunction1(double argument) {
+    public double customFunction1(double argument) throws InputDataFormatException {
         FractionValidator fractionValidation = new FractionValidator();
         if (fractionValidation.validateFraction(argument)) {
             double result = (argument >= 3) ? -pow(argument, 2) + 3 * argument + 9 : 1 / (pow(argument, 3) - 6);
             if (result == Double.POSITIVE_INFINITY) {
-                throw new ArithmeticException(EXCEPTION_DIVISION_BY_ZERO);
+                throw new InputDataFormatException(EXCEPTION_DIVISION_BY_ZERO);
             }
             return result;
         } else {
-            throw new NumberFormatException(EXCEPTION_CAPTION_INCORRECT_ARGUMENT);
+            throw new InputDataFormatException(EXCEPTION_CAPTION_INCORRECT_ARGUMENT);
         }
     }
 
-    private double specialFunction2(double x) {
+    private double customFunction2(double x) {
         return tan(x);
     }
 
-    public List<Point> calculateFunctionTable(double startSegment, double endSegment, double step) {
+    public List<Point> calculateFunctionTable(double startSegment, double endSegment, double step)
+            throws InputDataFormatException {
         FractionValidator fractionValidation = new FractionValidator();
         FigureValidator figureValidator = new FigureValidator();
         if (fractionValidation.validateFraction(startSegment) &&
@@ -42,12 +44,12 @@ public class FunctionService {
             List<Point> functionTable = new ArrayList<>();
             Point point;
             for (double i = startSegment; i <= endSegment; i = i + step) {
-                point = new Point(i, specialFunction2(i));
+                point = new Point(i, customFunction2(i));
                 functionTable.add(point);
             }
             return functionTable;
         } else {
-            throw new NumberFormatException(EXCEPTION_CAPTION_INCORRECT_VALUES);
+            throw new InputDataFormatException(EXCEPTION_CAPTION_INCORRECT_VALUES);
         }
     }
 }

@@ -2,7 +2,6 @@ package com.buyalskaya.day1.validator;
 
 import com.buyalskaya.day1.entity.DateYearMonth;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DateValidator {
@@ -14,7 +13,6 @@ public class DateValidator {
 
     public boolean validateStringDate(String date) {
         Pattern pattern = Pattern.compile(CHECK_DATE);
-        Matcher matcher = pattern.matcher(date);
         return pattern.matches(CHECK_DATE, date);
     }
 
