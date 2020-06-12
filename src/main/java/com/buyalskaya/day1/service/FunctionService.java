@@ -49,7 +49,7 @@ public class FunctionService {
             for (int i = 0; i < size; i++) {
                 point = new Point(argument, customFunction2(argument));
                 functionTable.add(point);
-                argument += step;
+                argument = argument + step;
             }
             return functionTable;
         } else {
