@@ -43,9 +43,13 @@ public class FunctionService {
                 figureValidator.validateRange(startSegment, endSegment)) {
             List<Point> functionTable = new ArrayList<>();
             Point point;
-            for (double i = startSegment; i <= endSegment; i = i + step) {
-                point = new Point(i, customFunction2(i));
+            int size = (int) ((endSegment - startSegment) / step) + 1;// calculate points inside the range
+            //(1 add because it needs to add a border point)
+            double argument = startSegment;
+            for (int i = 0; i < size; i++) {
+                point = new Point(argument, customFunction2(argument));
                 functionTable.add(point);
+                argument += step;
             }
             return functionTable;
         } else {

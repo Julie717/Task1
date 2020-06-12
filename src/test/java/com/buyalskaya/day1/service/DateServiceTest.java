@@ -2,13 +2,20 @@ package com.buyalskaya.day1.service;
 
 import com.buyalskaya.day1.entity.DateYearMonth;
 import com.buyalskaya.day1.exception.InputDataFormatException;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
 
 public class DateServiceTest {
-    DateService dateService = new DateService();
+    public static final String EXCEPTION_MESSAGE = "Data format is incorrect";
+    DateService dateService;
+
+    @BeforeClass
+    public void setUp() {
+        dateService = new DateService();
+    }
 
     @DataProvider(name = "dataForDateService")
     public Object[][] dataForDateService() {
@@ -30,7 +37,7 @@ public class DateServiceTest {
             assertEquals(actual, expected);
         } catch (
                 InputDataFormatException ex) {
-            fail();
+            fail(EXCEPTION_MESSAGE);
         }
     }
 

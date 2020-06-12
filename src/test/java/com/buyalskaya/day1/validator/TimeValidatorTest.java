@@ -1,16 +1,16 @@
 package com.buyalskaya.day1.validator;
 
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
 
 public class TimeValidatorTest {
-    TimeValidator timeValidator = new TimeValidator();
+    TimeValidator timeValidator;
 
-    @Test
-    public void testValidateTimeStringPositive() {
-        boolean actual = timeValidator.validateSecond("48500");
-        assertTrue(actual);
+    @BeforeClass
+    public void setUp() {
+        timeValidator = new TimeValidator();
     }
 
     @Test
@@ -21,7 +21,7 @@ public class TimeValidatorTest {
 
     @Test
     public void testValidateTimeStringNull() {
-        boolean actual = timeValidator.validateSecond((String) null);
+        boolean actual = timeValidator.validateSecond(null);
         assertFalse(actual);
     }
 

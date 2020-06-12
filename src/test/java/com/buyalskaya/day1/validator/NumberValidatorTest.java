@@ -1,11 +1,17 @@
 package com.buyalskaya.day1.validator;
 
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
 
 public class NumberValidatorTest {
-    NumberValidator numberValidator = new NumberValidator();
+    NumberValidator numberValidator;
+
+    @BeforeClass
+    public void setUp() {
+        numberValidator = new NumberValidator();
+    }
 
     @Test
     public void testValidateNumberStringPositive() {
@@ -21,7 +27,8 @@ public class NumberValidatorTest {
 
     @Test
     public void testValidateNumberStringNull() {
-        boolean actual = numberValidator.validateNumber((String) null);
+        String number=null;
+        boolean actual = numberValidator.validateNumber(number);
         assertFalse(actual);
     }
 

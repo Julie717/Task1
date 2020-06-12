@@ -1,10 +1,8 @@
 package com.buyalskaya.day1.entity;
 
-import com.buyalskaya.day1.comparator.PointComparator;
-
 import java.util.StringJoiner;
 
-public class Point implements Comparable<Point> {
+public class Point {
     private double x;
     private double y;
 
@@ -38,7 +36,7 @@ public class Point implements Comparable<Point> {
             return false;
         }
         Point point = (Point) obj;
-        return (Double.compare(point.x, x) == 0) && (Double.compare(point.y, y) == 0);
+        return (point.x == x) && (point.y == y);
     }
 
     @Override
@@ -52,11 +50,5 @@ public class Point implements Comparable<Point> {
                 .add("x=" + x)
                 .add("y=" + y)
                 .toString();
-    }
-
-    @Override
-    public int compareTo(Point o) {
-        PointComparator pointComparator = new PointComparator();
-        return pointComparator.compare(this, o);
     }
 }

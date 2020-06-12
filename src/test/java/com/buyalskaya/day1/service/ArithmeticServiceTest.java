@@ -1,12 +1,19 @@
 package com.buyalskaya.day1.service;
 
 import com.buyalskaya.day1.exception.InputDataFormatException;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
 
 public class ArithmeticServiceTest {
-    ArithmeticService arithmeticService = new ArithmeticService();
+    public static final String EXCEPTION_MESSAGE = "Data format is incorrect";
+    ArithmeticService arithmeticService;
+
+    @BeforeClass
+    public void setUp() {
+        arithmeticService = new ArithmeticService();
+    }
 
     @Test
     public void testLastDigitOfSquareNumberPositive() {
@@ -15,13 +22,13 @@ public class ArithmeticServiceTest {
             int actual = arithmeticService.lastDigitOfSquareNumber(97);
             assertEquals(actual, expected);
         } catch (InputDataFormatException ex) {
-            fail();
+            fail(EXCEPTION_MESSAGE);
         }
     }
 
     @Test(expectedExceptions = InputDataFormatException.class)
     public void testLastDigitOfSquareNumberException() throws InputDataFormatException {
-        int actual = arithmeticService.lastDigitOfSquareNumber(50001);
+        arithmeticService.lastDigitOfSquareNumber(50001);
     }
 
     @Test
@@ -30,7 +37,7 @@ public class ArithmeticServiceTest {
             boolean actual = arithmeticService.isEven(8);
             assertTrue(actual);
         } catch (InputDataFormatException ex) {
-            fail();
+            fail(EXCEPTION_MESSAGE);
         }
     }
 
@@ -40,13 +47,13 @@ public class ArithmeticServiceTest {
             boolean actual = arithmeticService.isEven(97);
             assertFalse(actual);
         } catch (InputDataFormatException ex) {
-            fail();
+            fail(EXCEPTION_MESSAGE);
         }
     }
 
     @Test(expectedExceptions = InputDataFormatException.class)
     public void testIsEvenException() throws InputDataFormatException {
-        boolean actual = arithmeticService.isEven(-50001);
+        arithmeticService.isEven(-50001);
     }
 
     @Test
@@ -56,7 +63,7 @@ public class ArithmeticServiceTest {
             boolean actual = arithmeticService.isEvenTwoNumbers(arrayNumber);
             assertTrue(actual);
         } catch (InputDataFormatException ex) {
-            fail();
+            fail(EXCEPTION_MESSAGE);
         }
     }
 
@@ -67,14 +74,14 @@ public class ArithmeticServiceTest {
             boolean actual = arithmeticService.isEvenTwoNumbers(arrayNumber);
             assertFalse(actual);
         } catch (InputDataFormatException ex) {
-            fail();
+            fail(EXCEPTION_MESSAGE);
         }
     }
 
     @Test(expectedExceptions = InputDataFormatException.class)
     public void testIsEvenTwoNumbersException() throws InputDataFormatException {
         int[] arrayNumber = {1, 50412, 3, 1};
-        boolean actual = arithmeticService.isEvenTwoNumbers(arrayNumber);
+        arithmeticService.isEvenTwoNumbers(arrayNumber);
     }
 
     @Test
@@ -84,13 +91,13 @@ public class ArithmeticServiceTest {
             int expected = 3;
             assertEquals(actual, expected);
         } catch (InputDataFormatException ex) {
-            fail();
+            fail(EXCEPTION_MESSAGE);
         }
     }
 
     @Test(expectedExceptions = InputDataFormatException.class)
     public void testSumDividesException() throws InputDataFormatException {
-        int actual = arithmeticService.sumDivides(0);
+        arithmeticService.sumDivides(0);
     }
 
     @Test
@@ -99,7 +106,7 @@ public class ArithmeticServiceTest {
             boolean actual = arithmeticService.isPerfectNumber(28);
             assertTrue(actual);
         } catch (InputDataFormatException ex) {
-            fail();
+            fail(EXCEPTION_MESSAGE);
         }
     }
 

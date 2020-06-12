@@ -1,34 +1,36 @@
 package com.buyalskaya.day1.validator;
 
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
 
 public class FractionValidatorTest {
-    FractionValidator fractionValidator = new FractionValidator();
+    FractionValidator fractionValidator;
 
-    @Test
-    public void testValidateFractionStringPositive() {
-        boolean actual = fractionValidator.validateFraction("15.5");
-        assertTrue(actual);
+    @BeforeClass
+    public void setUp() {
+        fractionValidator = new FractionValidator();
     }
 
-    @Test
-    public void testValidateFractionStringExpPositive() {
-        boolean actual = fractionValidator.validateFraction("1E-5");
-        assertTrue(actual);
+    @DataProvider(name = "dataForValidateFractionString")
+    public Object[][] dataForValidateFractionString() {
+        return new Object[][]{
+                {"15.5", true},
+                {"1E-5", true},
+                {"point", false},
+                {"1.5.4", false},
+                {null, false},
+                {"-50001", false},
+                {"50000.5", false}
+        };
     }
 
-    @Test
-    public void testValidateFractionStringNegative() {
-        boolean actual = fractionValidator.validateFraction("point");
-        assertFalse(actual);
-    }
-
-    @Test
-    public void testValidateFractionStringNull() {
-        boolean actual = fractionValidator.validateFraction((String) null);
-        assertFalse(actual);
+    @Test(dataProvider = "dataForValidateFractionString")
+    public void testParamsValidateFractionString(String number, boolean expected) {
+        boolean actual = fractionValidator.validateFraction(number);
+        assertEquals(actual, expected);
     }
 
     @Test

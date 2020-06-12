@@ -1,5 +1,6 @@
 package com.buyalskaya.day1.service;
 
+import com.buyalskaya.day1.comparator.PointComparator;
 import com.buyalskaya.day1.entity.Point;
 import com.buyalskaya.day1.exception.InputDataFormatException;
 import com.buyalskaya.day1.validator.FigureValidator;
@@ -34,7 +35,9 @@ public class FigureService {
         FigureValidator figureValidation = new FigureValidator();
         if (figureValidation.validatePoint(point1) &&
                 figureValidation.validatePoint(point2)) {
-            return point1.compareTo(point2);
+            PointComparator pointComparator = new PointComparator();
+            int pointNearestToCenter = pointComparator.compare(point1, point2);
+            return pointNearestToCenter; // -1 - point1, 1 - point2, 0 - the same
         } else {
             throw new InputDataFormatException(EXCEPTION_CAPTION_INCORRECT_POINT);
         }

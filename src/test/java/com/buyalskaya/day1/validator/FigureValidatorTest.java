@@ -1,12 +1,18 @@
 package com.buyalskaya.day1.validator;
 
 import com.buyalskaya.day1.entity.Point;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
 
 public class FigureValidatorTest {
-    FigureValidator figureValidator = new FigureValidator();
+    FigureValidator figureValidator;
+
+    @BeforeClass
+    public void setUp() {
+        figureValidator = new FigureValidator();
+    }
 
     @Test
     public void testValidateAreaStringPositive() {

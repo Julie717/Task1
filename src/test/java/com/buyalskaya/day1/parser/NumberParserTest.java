@@ -1,13 +1,20 @@
 package com.buyalskaya.day1.parser;
 
 import com.buyalskaya.day1.exception.InputDataFormatException;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
 
 public class NumberParserTest {
-    NumberParser numberParser = new NumberParser();
+    public static final String EXCEPTION_MESSAGE = "Data format is incorrect";
+    NumberParser numberParser;
+
+    @BeforeClass
+    public void setUp() {
+        numberParser = new NumberParser();
+    }
 
     @Test
     public void testIntegerParserPositive() {
@@ -17,7 +24,7 @@ public class NumberParserTest {
             assertEquals(actual, expected);
         } catch (
                 InputDataFormatException ex) {
-            fail();
+            fail(EXCEPTION_MESSAGE);
         }
     }
 
@@ -33,9 +40,8 @@ public class NumberParserTest {
             int[] actual = numberParser.arrayIntegerParser(arrayInteger);
             int[] expected = {12, 1, -1, 0};
             assertEquals(actual, expected);
-        } catch (
-                InputDataFormatException ex) {
-            fail();
+        } catch (InputDataFormatException ex) {
+            fail(EXCEPTION_MESSAGE);
         }
     }
 
@@ -59,9 +65,8 @@ public class NumberParserTest {
         try {
             double actual = numberParser.doubleParser(number);
             assertEquals(actual, numberDouble);
-        } catch (
-                InputDataFormatException ex) {
-            fail();
+        } catch (InputDataFormatException ex) {
+            fail(EXCEPTION_MESSAGE);
         }
     }
 

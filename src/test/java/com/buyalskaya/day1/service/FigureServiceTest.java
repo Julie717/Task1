@@ -14,7 +14,7 @@ public class FigureServiceTest {
     public void testAreaSquareInscribedInCirclePositive() {
         try {
             double actual = figureService.areaSquareInscribedInCircle(25);
-            double expected = 25.0 / 2.0;
+            double expected = 12.5;
             assertEquals(actual, expected);
         } catch (
                 InputDataFormatException ex) {
@@ -72,8 +72,8 @@ public class FigureServiceTest {
         try {
             double radius = 5;
             double actual = figureService.areaCircle(radius);
-            double expected = Math.PI * Math.pow(radius, 2);
-            assertEquals(actual, expected);
+            double expected = 78.5398;
+            assertEquals(actual, expected,1E-4);
         } catch (
                 InputDataFormatException ex) {
             fail();
@@ -90,8 +90,8 @@ public class FigureServiceTest {
         try {
             double radius = 5;
             double actual = figureService.circumference(radius);
-            double expected = 2 * Math.PI * radius;
-            assertEquals(actual, expected);
+            double expected = 31.4159;
+            assertEquals(actual, expected,1E-4);
         } catch (
                 InputDataFormatException ex) {
             fail();

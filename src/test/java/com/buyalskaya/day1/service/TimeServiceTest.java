@@ -2,12 +2,19 @@ package com.buyalskaya.day1.service;
 
 import com.buyalskaya.day1.entity.Time;
 import com.buyalskaya.day1.exception.InputDataFormatException;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
 
 public class TimeServiceTest {
-    TimeService timeService = new TimeService();
+    public static final String EXCEPTION_MESSAGE = "Data format is incorrect";
+    TimeService timeService;
+
+    @BeforeClass
+    public void setUp() {
+        timeService = new TimeService();
+    }
 
     @Test
     public void testCalculateTimePositive() {
@@ -17,7 +24,7 @@ public class TimeServiceTest {
             assertEquals(actual, expected);
         } catch (
                 InputDataFormatException ex) {
-            fail();
+            fail(EXCEPTION_MESSAGE);
         }
     }
 

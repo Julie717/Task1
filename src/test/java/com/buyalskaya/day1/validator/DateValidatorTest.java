@@ -1,13 +1,19 @@
 package com.buyalskaya.day1.validator;
 
 import com.buyalskaya.day1.entity.DateYearMonth;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
 
 public class DateValidatorTest {
-    DateValidator dateValidator = new DateValidator();
+    DateValidator dateValidator;
+
+    @BeforeClass
+    public void setUp() {
+        dateValidator = new DateValidator();
+    }
 
     @DataProvider(name = "dataForDate")
     public Object[][] dataForDate() {
